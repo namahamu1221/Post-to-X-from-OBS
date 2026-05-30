@@ -1,5 +1,7 @@
 # Post to X from OBS
 
+!["テスト"](images/image1.png)
+
 A simple OBS Browser Dock that opens the official X (Twitter) post screen without requiring the X API or Twitch API.
 
 ## Features
@@ -31,7 +33,9 @@ Your post text and stream URL are stored locally in your browser using Local Sto
 ---
 
 # 日本語
-!["配信開始ポスト"](images/image1.png)
+
+!["テスト"](images/image1.png)
+
 X APIやTwitch APIを使用せずに、OBSからXへ投稿できるシンプルなツールです。
 
 ## 特徴
