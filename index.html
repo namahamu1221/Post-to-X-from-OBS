@@ -1,1 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>OBS X Post Dock</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #181818;
+    color: #fff;
+    margin: 12px;
+  }
 
+  label {
+    display: block;
+    margin-top: 10px;
+    font-size: 13px;
+  }
+
+  textarea, input {
+    width: 100%;
+    box-sizing: border-box;
+    background: #2b2b2b;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  textarea {
+    height: 50px;
+    resize: vertical;
+  }
+
+.post-button {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 6px;
+  background: #1d9bf0;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.post-button:hover {
+  background: #1685cf;
+}
+
+  .count {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #aaa;
+    text-align: right;
+  }
+
+  .footer {
+    margin-top: 12px;
+    font-size: 11px;
+    color: #888;
+    line-height: 1.4; 
+  }
+</style>
+</head>
+<body>
+
+<h3>OBS X Post</h3>
+
+<label>投稿本文</label>
+<textarea id="postText">配信開始！
+見に来てね！</textarea>
+
+<label>Twitch URL</label>
+<input id="twitchUrl" type="text" value="https://twitch.tv/自分のID">
+
+<a href="#" id="postLink" class="post-button">
+  Xの投稿画面を開く
+</a>
+
+<div class="footer">
+  X APIを使わずにOBSからPostできるツールです。<br>
+  投稿はOBSのCEFブラウザ経由で、X公式の投稿画面から行われます。<br>
+  ホイールクリックでは既定ブラウザで開けます。<br><br>
+
+  OBS X Post Dock v1.0.0<br>
+  Created by 
+  <a rel="noopener noreferrer" target="_blank" href="https://github.com/namahamu1221">namahamu1221</a>
+</div>
+
+<script>
+const postText = document.getElementById("postText");
+const twitchUrl = document.getElementById("twitchUrl");
+const postLink = document.getElementById("postLink");
+
+/* 保存データを読み込み */
+postText.value =
+    localStorage.getItem("postText") ||
+    "配信開始！\n見に来てね！";
+
+twitchUrl.value =
+    localStorage.getItem("twitchUrl") ||
+    "https://twitch.tv/自分のID";
+
+function buildText() {
+  const text = postText.value.trim();
+  const url = twitchUrl.value.trim();
+
+  if (text && url) {
+    return text + "\n" + url;
+  }
+
+  return text || url;
+}
+
+/* 入力時に自動保存 */
+function saveSettings() {
+  localStorage.setItem("postText", postText.value);
+  localStorage.setItem("twitchUrl", twitchUrl.value);
+}
+
+function updatePostLink() {
+  const text = buildText();
+  const url =
+    "https://twitter.com/intent/tweet?text=" +
+    encodeURIComponent(text);
+
+  postLink.href = url;
+}
+
+function openPost(event) {
+  event.preventDefault();
+
+  saveSettings();
+  updatePostLink();
+
+  window.open(postLink.href, "_blank", "noopener,noreferrer");
+}
+
+postText.addEventListener("input", function() {
+  saveSettings();
+  updatePostLink();
+});
+
+twitchUrl.addEventListener("input", function() {
+  saveSettings();
+  updatePostLink();
+});
+
+postLink.addEventListener("click", openPost);
+
+updatePostLink();
+</script>
+
+</body>
+</html>
