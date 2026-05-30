@@ -1,167 +1,171 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="UTF-8">
-<title>OBS X Post Dock</title>
-<style>
-  body {
-    font-family: sans-serif;
-    background: #181818;
-    color: #fff;
-    margin: 12px;
-  }
+  <meta charset="UTF-8">
+  <title>OBS X Post Dock</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #181818;
+      color: #fff;
+      margin: 12px;
+    }
 
-  label {
-    display: block;
-    margin-top: 10px;
-    font-size: 13px;
-  }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-size: 13px;
+    }
 
-  textarea, input {
-    width: 100%;
-    box-sizing: border-box;
-    background: #2b2b2b;
-    color: #fff;
-    border: 1px solid #555;
-    border-radius: 6px;
-    padding: 8px;
-    font-size: 14px;
-  }
+    textarea,
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      background: #2b2b2b;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 6px;
+      padding: 8px;
+      font-size: 14px;
+    }
 
-  textarea {
-    height: 50px;
-    resize: vertical;
-  }
+    textarea {
+      height: 50px;
+      resize: vertical;
+    }
 
-.post-button {
-  display: block;
-  width: 100%;
-  margin-top: 12px;
-  padding: 10px;
-  border-radius: 6px;
-  background: #1d9bf0;
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  box-sizing: border-box;
-}
+    .post-button {
+      display: block;
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 6px;
+      background: #1d9bf0;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
 
-.post-button:hover {
-  background: #1685cf;
-}
+    .post-button:hover {
+      background: #1685cf;
+    }
 
-  .count {
-    margin-top: 6px;
-    font-size: 12px;
-    color: #aaa;
-    text-align: right;
-  }
+    .count {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #aaa;
+      text-align: right;
+    }
 
-  .footer {
-    margin-top: 12px;
-    font-size: 11px;
-    color: #888;
-    line-height: 1.4; 
-  }
-</style>
+    .footer {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #888;
+      line-height: 1.4;
+    }
+  </style>
 </head>
+
 <body>
 
-<h3>OBS X Post</h3>
-  
-<div style="font-size:12px; color:#aaa; margin-top:-8px; margin-bottom:10px;">
-  事前にXへ
-  <a href="https://x.com/login" target="_blank" rel="noopener noreferrer">
-    ログイン
-  </a>
-  しておくとスムーズに投稿できます。
-</div>
+  <h3>OBS X Post</h3>
 
-<label>投稿本文</label>
-<textarea id="postText">配信開始！
+  <label>投稿本文</label>
+  <textarea id="postText">配信開始！
 見に来てね！</textarea>
 
-<label>配信 URL</label>
-<input id="twitchUrl" type="text" value="https://twitch.tv/自分のID">
+  <label>配信 URL</label>
+  <input id="twitchUrl" type="text" value="https://twitch.tv/自分のID">
 
-<a href="#" id="postLink" class="post-button">
-  Xの投稿画面を開く
-</a>
+  <a href="#" id="postLink" class="post-button">
+    Xの投稿画面を開く
+  </a>
 
-<div class="footer">
-  X APIを使わずにOBSからPostできるツールです。<br>
-  投稿はOBSのCEFブラウザ経由で、X公式の投稿画面から行われます。<br>
-  ホイールクリックで既定ブラウザで開けます。<br><br>
+  <div style="font-size:12px; color:#aaa; margin-top:-8px; margin-bottom:10px;">
+    事前にXへ
+    <a href="https://x.com/login" target="_blank" rel="noopener noreferrer">
+      ログイン
+    </a>
+    しておくとスムーズに投稿できます。
+  </div>
 
-  Post to X from OBS v1.0.0<br>
-  Created by 
-  <a rel="noopener noreferrer" target="_blank" href="https://github.com/namahamu1221">namahamu1221</a>
-</div>
+  <div class="footer">
+    X APIを使わずにOBSからPostできるツールです。<br>
+    投稿はOBSのCEFブラウザ経由で、X公式の投稿画面から行われます。<br>
+    ホイールクリックで既定ブラウザで開けます。<br><br>
 
-<script>
-const postText = document.getElementById("postText");
-const twitchUrl = document.getElementById("twitchUrl");
-const postLink = document.getElementById("postLink");
+    Post to X from OBS v1.0.0<br>
+    Created by
+    <a rel="noopener noreferrer" target="_blank" href="https://github.com/namahamu1221">namahamu1221</a>
+  </div>
 
-/* 保存データを読み込み */
-postText.value =
-    localStorage.getItem("postText") ||
-    "配信開始！";
+  <script>
+    const postText = document.getElementById("postText");
+    const twitchUrl = document.getElementById("twitchUrl");
+    const postLink = document.getElementById("postLink");
 
-twitchUrl.value =
-    localStorage.getItem("twitchUrl") ||
-    "https://twitch.tv/自分のID";
+    /* 保存データを読み込み */
+    postText.value =
+      localStorage.getItem("postText") ||
+      "配信開始！";
 
-function buildText() {
-  const text = postText.value.trim();
-  const url = twitchUrl.value.trim();
+    twitchUrl.value =
+      localStorage.getItem("twitchUrl") ||
+      "https://twitch.tv/自分のID";
 
-  if (text && url) {
-    return text + "\n" + url;
-  }
+    function buildText() {
+      const text = postText.value.trim();
+      const url = twitchUrl.value.trim();
 
-  return text || url;
-}
+      if (text && url) {
+        return text + "\n" + url;
+      }
 
-/* 入力時に自動保存 */
-function saveSettings() {
-  localStorage.setItem("postText", postText.value);
-  localStorage.setItem("twitchUrl", twitchUrl.value);
-}
+      return text || url;
+    }
 
-function updatePostLink() {
-  const text = buildText();
-  const url =
-    "https://twitter.com/intent/tweet?text=" +
-    encodeURIComponent(text);
+    /* 入力時に自動保存 */
+    function saveSettings() {
+      localStorage.setItem("postText", postText.value);
+      localStorage.setItem("twitchUrl", twitchUrl.value);
+    }
 
-  postLink.href = url;
-}
+    function updatePostLink() {
+      const text = buildText();
+      const url =
+        "https://twitter.com/intent/tweet?text=" +
+        encodeURIComponent(text);
 
-function openPost(event) {
-  event.preventDefault();
+      postLink.href = url;
+    }
 
-  saveSettings();
-  updatePostLink();
+    function openPost(event) {
+      event.preventDefault();
 
-  window.open(postLink.href, "_blank", "noopener,noreferrer");
-}
+      saveSettings();
+      updatePostLink();
 
-postText.addEventListener("input", function() {
-  saveSettings();
-  updatePostLink();
-});
+      window.open(postLink.href, "_blank", "noopener,noreferrer");
+    }
 
-twitchUrl.addEventListener("input", function() {
-  saveSettings();
-  updatePostLink();
-});
+    postText.addEventListener("input", function () {
+      saveSettings();
+      updatePostLink();
+    });
 
-postLink.addEventListener("click", openPost);
+    twitchUrl.addEventListener("input", function () {
+      saveSettings();
+      updatePostLink();
+    });
 
-updatePostLink();
-</script>
+    postLink.addEventListener("click", openPost);
+
+    updatePostLink();
+  </script>
 
 </body>
+
 </html>
