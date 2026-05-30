@@ -31,7 +31,7 @@ Your post text and stream URL are stored locally in your browser using Local Sto
 ---
 
 # 日本語
-
+!["配信開始ポスト"](images/images1.png)
 X APIやTwitch APIを使用せずに、OBSからXへ投稿できるシンプルなツールです。
 
 ## 特徴
