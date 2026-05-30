@@ -1,4 +1,4 @@
-# OBS-X-POST-DOCK
+# Post-to-X-from-OBS
 
 X APIやTwitch APIを使用せず、
 OBSからXの投稿画面を開くためのシンプルなDockです。
