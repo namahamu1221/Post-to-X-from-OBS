@@ -71,18 +71,17 @@
 
 <body>
 
-  <label>投稿本文</label>
-  <textarea id="postText">配信開始！
-見に来てね！</textarea>
+  <label for="postText">ポスト内容</label>
+  <textarea id="postText" placeholder="(例)イモータル行くまで絶対にやめないぞ！放送"></textarea>
 
-  <label>配信 URL</label>
-  <input id="twitchUrl" type="text" value="https://twitch.tv/自分のID">
+  <label for="twitchUrl">配信 URL</label>
+  <input id="twitchUrl" type="url" placeholder="https://twitch.tv/自分のID" value="https://twitch.tv/自分のID">
 
   <a href="#" id="postLink" class="post-button">
     Xの投稿画面を開く
   </a>
 
-  <h3>Post to X from OBS</h3>
+  <h3>OBS X Post</h3>
 
   <div style="font-size:12px; color:#aaa; margin-top:10px; margin-bottom:10px;">
     OBSのカスタムブラウザドックに登録後、<br>
@@ -97,7 +96,7 @@
     X API不要で、OBSからXへ投稿できるツールです。<br>
     投稿はX公式の投稿画面から行われます。<br>
     リンクをホイールクリックすると既定のブラウザで開けます。<br><br>
-    Post to X from OBS v1.0.0<br>
+    Post to X from OBS v1.0.1<br>
     Created by
     <a rel="noopener noreferrer" target="_blank" href="https://github.com/namahamu1221">namahamu1221</a>
   </div>
@@ -110,7 +109,7 @@
     /* 保存データを読み込み */
     postText.value =
       localStorage.getItem("postText") ||
-      "配信開始！";
+      "";
 
     twitchUrl.value =
       localStorage.getItem("twitchUrl") ||
@@ -136,7 +135,7 @@
     function updatePostLink() {
       const text = buildText();
       const url =
-        "https://x.com/intent/post?text=" +
+        "https://twitter.com/intent/tweet?text=" +
         encodeURIComponent(text);
 
       postLink.href = url;
