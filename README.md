@@ -4,6 +4,10 @@
 
 A simple OBS Browser Dock that opens the official X (Twitter) post screen without requiring the X API or Twitch API.
 
+## Requirements
+
+- OBS Studio 31.0 or later
+
 ## Features
 
 * No API required
@@ -34,6 +38,10 @@ Your post text and stream URL are stored locally in your browser using Local Sto
 
 # 日本語
 X APIやTwitch APIを使用せずに、OBSからXへ投稿できるシンプルなツールです。
+
+## 動作環境
+
+- OBS Studio 31.0以上
 
 ## 特徴
 
